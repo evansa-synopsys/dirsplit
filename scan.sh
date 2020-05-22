@@ -15,7 +15,9 @@ then
   VERSION=LATEST
 fi
 
-bash <(curl -s -L https://detect.synopsys.com/detect.sh) --blackduck.url=<BD_URL> --blackduck.api.token=<BD_API_TOKEN> --blackduck.trust.cert=true \
+bash <(curl -s -L https://detect.synopsys.com/detect.sh) --blackduck.url=https://ec2-3-21-46-158.us-east-2.compute.amazonaws.com \
+--blackduck.api.token= ZDI4OTBlMjMtNDBlNi00MDJhLTk3M2EtNTA2MmY3ZTQwMTMxOmI3YjJiZDZjLTE5ZmQtNGYwYy1iNmU2LWNhYzM5OTgyOTliMw== \
+--blackduck.trust.cert=true \
 --detect.project.name=hub-spdx \
      --detect.project.version.name=${VERSION} \
      --detect.source.path=${PROJECT}/${SOURCE_PATH} \

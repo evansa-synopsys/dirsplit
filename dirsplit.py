@@ -25,10 +25,11 @@ import sys
 import tempfile
 
 if len(sys.argv) < 3:
-    print >> sys.stderr, 'Usage: %s directory max-size in bytes' % (sys.argv[0])
+    print("sys.argv = " +str(len(sys.argv)))
+    print(sys.stderr, 'Usage: %s directory max-size in bytes' % (sys.argv[0]))
     sys.exit(1)
 
-
+print("sys.argv = " +str(len(sys.argv)))
 class File:
     def __init__(self, name):
         self.name = name
