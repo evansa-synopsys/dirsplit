@@ -1,3 +1,9 @@
+Modify the configuration file conf/scan.properties and add the following Black Duck information (required): 
+bdURL=<URL-To-BD-Host>
+bdAPIToken=<BD_API_TOKEN>
+bdProjectName=<Target_Project_Name>
+bdProjectVersion=<Target_Project_Version>
+
 usage: ps-scan.py [-h] -d TARGET_DIRECTORY [-s SIZE] [-r REFRESH]
                   [-c CONFIG_FILE]
 
