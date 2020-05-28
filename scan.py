@@ -70,6 +70,8 @@ for fileName in os.listdir(rootDir):
         detectCommand = re.sub("(chunk-\d*)", fileName, detectCommand)
         print('passing detectCommand to detect script= %s' % detectCommand)
         p = subprocess.Popen(["bash", detectScriptPath, detectCommand], stdout=sys.stdout)
+        p.wait()
 
+# clean up
 if arguments.refresh:
     doRefresh()

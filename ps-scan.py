@@ -63,20 +63,20 @@ with open(confFile, "r") as cf:
         else:
             break
 
+# make any changes to the detect properties here.
 detectCommand = '--blackduck.url={0} --blackduck.api.token={1} --blackduck.trust.cert=true --detect.project.name={2} --detect.project.version.name={3} --detect.source.path={4}\\chunk- --detect.code.location.name={2}_{3}_chunk-_code --detect.bom.aggregate.name={2}_{3}_chunk-_PKG --detect.excluded.detector.types=ALL'.format(
     bdURL.strip(), bdAPIToken.strip(), bdProjectName.strip(), bdProjectVersion.strip(), rootDir)
 
-# Make sure you can run powershell scripts (it is disabled by default).
 for fileName in os.listdir(rootDir):
     if os.path.isfile(fileName) and fileName.startswith('chunk-'):
         detectScriptPath = "%s\\detect.ps1" % rootDir
         detectCommand = re.sub("(chunk-\d*)", fileName, detectCommand)
         print('passing detectCommand to detect script= %s' % detectCommand)
+        #just split up and pass each argument to the detect jar and run in a subprocess
         p = ["java", "-jar", "synopsys-detect-6.3.0.jar"]
         p.extend(detectCommand.split())
-        # p = subprocess.Popen(["powershell.exe", detectScriptPath, detectCommand], stdout=sys.stdout)
         s = subprocess.Popen(p, shell=True)
         s.wait()
-
+# clean up
 if arguments.refresh:
     doRefresh()
