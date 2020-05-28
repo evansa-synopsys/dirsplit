@@ -13,7 +13,7 @@ parser = argparse.ArgumentParser(
     description='A python script that splits a large directory into subdirectories and calls BD Detect on each of them')
 parser.add_argument('-d', '--target-directory', required=True,
                     help='Absolute path to directory containing source files to be split')
-parser.add_argument('-s', '--size', default=2000000000, help='Size limit in bytes. Default is 2000000000B or 2GB')
+parser.add_argument('-s', '--size', default=1000000000, help='Size limit in bytes. Default is 1000000000B or 1GB')
 parser.add_argument('-r', '--refresh', default=True, help='Delete generated subdirectories if they exist. Default is True')
 parser.add_argument('-c', '--config-file', default='scan.properties',
                     help='Name of config file to use. Default is scan.properties.')
