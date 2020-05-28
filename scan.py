@@ -14,7 +14,7 @@ parser = argparse.ArgumentParser(
 parser.add_argument('-d', '--target-directory', required=True,
                     help='Absolute path to directory containing source files to be split')
 parser.add_argument('-s', '--size', default=2000000000, help='Size limit in bytes. Default is 2000000000B or 2GB')
-parser.add_argument('-r', '--refresh', default=True, help='delete generated subdirectories if they exist')
+parser.add_argument('-r', '--refresh', default=True, help='Delete generated subdirectories if they exist. Default is True')
 parser.add_argument('-c', '--config-file', default='scan.properties',
                     help='Name of config file to use. Default is scan.properties.')
 
@@ -23,11 +23,14 @@ rootDir = os.path.dirname(os.path.realpath(__file__))
 confFile = os.path.join(rootDir, "conf", arguments.config_file)
 dirsplit = './dirsplit.py'
 
-if arguments.refresh:
+def doRefresh():
     for fileName in os.listdir(rootDir):
         if os.path.isfile(fileName) and fileName.startswith('chunk-'):
-            print("removing %s " % fileName)
+            print("Removing generated sub-directory %s " % fileName)
             os.remove(fileName)
+
+# remove any generated directories from previous run.
+doRefresh()
 
 sys.argv = [dirsplit, arguments.target_directory, arguments.size, rootDir]
 # sys.argv = [dirsplit, '/Users/alexevans/Downloads/jive-hop-custom', arguments.size, rootDir]
@@ -67,3 +70,6 @@ for fileName in os.listdir(rootDir):
         detectCommand = re.sub("(chunk-\d*)", fileName, detectCommand)
         print('passing detectCommand to detect script= %s' % detectCommand)
         p = subprocess.Popen(["bash", detectScriptPath, detectCommand], stdout=sys.stdout)
+
+if arguments.refresh:
+    doRefresh()
